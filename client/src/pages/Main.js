@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import API from "../utils/API";
 import Results from "../components/Results";
 import Wrapper from "../components/Wrapper";
@@ -7,10 +8,11 @@ import Search from "../components/Search";
 class Main extends Component {
 
     state = {
+        //set initial state
         articles : [],
-        topic: "Gerrymandering",
+        topic: "Cat Cafe",
         startYear: "2012",
-        endYear: "2016"
+        endYear: "2018"
     }
 
     componentDidMount () {
@@ -62,17 +64,19 @@ class Main extends Component {
     render () {
         return (
             <Wrapper>
-            <Search
-            handleTopicInput={this.handleTopicInput}
-            handleStartYearInput={this.handleStartYearInput}
-            handleEndYearInput={this.handleEndYearInput}
-            handleFormSubmit={this.handleFormSubmit}
-            />
-            {this.state.articles.map(article => (
-            <Results
-            title = {article.headline.main}
-            />
-            ))}
+                <Search
+                    handleTopicInput={this.handleTopicInput}
+                    handleStartYearInput={this.handleStartYearInput}
+                    handleEndYearInput={this.handleEndYearInput}
+                    handleFormSubmit={this.handleFormSubmit}
+                />
+                {this.state.articles.map(article => (
+                    <Link to="/api/saved">
+                    <Results
+                    title = {article.headline.main}
+                    />
+                    </Link>
+                ))}
             </Wrapper>
         )
     }
