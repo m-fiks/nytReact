@@ -7,11 +7,44 @@ import Search from "../components/Search";
 class Main extends Component {
 
     state = {
-        articles : []
+        articles : [],
+        topic: "Gerrymandering",
+        startYear: "2012",
+        endYear: "2016"
     }
 
-    componentDidMount() {
-        API.articleQuery()
+    componentDidMount () {
+        API.articleQuery(this.state.topic, this.state.startYear, this.state.endYear)
+        .then(res => {
+            //console.log(res.data.response.docs)
+            const results = res.data.response.docs;
+            //console.log(results)
+            this.setState({articles: results})
+            // results.map((elem) => {
+            //     let title = elem.headline.main;
+            //     console.log(title);
+            //     return title;
+            // })
+            console.log(this.state.results)
+        })
+    }
+
+    handleTopicInput = e => {
+        this.setState({topic: e.target.value})
+    }
+
+    handleStartYearInput = e => {
+        this.setState({startYear: e.target.value})
+    }
+
+    handleEndYearInput = e => {
+        this.setState({endYear: e.target.value})
+    }
+
+    handleFormSubmit = e => {
+        e.preventDefault();
+        console.log(this.state)
+        API.articleQuery(this.state.topic, this.state.startYear, this.state.endYear)
         .then(res => {
             //console.log(res.data.response.docs)
             const results = res.data.response.docs;
@@ -29,7 +62,12 @@ class Main extends Component {
     render () {
         return (
             <Wrapper>
-            <Search/>
+            <Search
+            handleTopicInput={this.handleTopicInput}
+            handleStartYearInput={this.handleStartYearInput}
+            handleEndYearInput={this.handleEndYearInput}
+            handleFormSubmit={this.handleFormSubmit}
+            />
             {this.state.articles.map(article => (
             <Results
             title = {article.headline.main}
