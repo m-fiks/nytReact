@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import Results from "../components/Results";
 import Wrapper from "../components/Wrapper";
+import Search from "../components/Search";
 
 class Main extends Component {
 
@@ -28,6 +29,7 @@ class Main extends Component {
     render () {
         return (
             <Wrapper>
+            <Search/>
             {this.state.articles.map(article => (
             <Results
             title = {article.headline.main}

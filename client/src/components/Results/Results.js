@@ -3,7 +3,7 @@ import "./Results.css";
 
 const Results = props => (
     <div id="articleInfo">
-        <h4>{props.title}<button type="submit" className="btn btn-info">Save</button></h4>
+        <h4>{props.title} <button id="saveButton" type="submit" className="btn btn-info">Save</button></h4>
         
     </div>
 );

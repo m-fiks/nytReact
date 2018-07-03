@@ -1,4 +1,10 @@
 #articleInfo {
     border: solid 1px blueviolet;
-    width: 600px;
+    width: 800px;
+    padding: 20px;
+    margin: 2px;
+}
+
+#saveButton {
+    float: right;
 }
