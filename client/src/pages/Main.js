@@ -10,24 +10,19 @@ class Main extends Component {
     state = {
         //set initial state
         articles : [],
-        topic: "Cat Cafe",
-        startYear: "2012",
-        endYear: "2018"
+        topic: "",
+        startYear: "",
+        endYear: ""
     }
 
     componentDidMount () {
-        API.articleQuery(this.state.topic, this.state.startYear, this.state.endYear)
+        API.getAll()
         .then(res => {
-            //console.log(res.data.response.docs)
-            const results = res.data.response.docs;
-            //console.log(results)
-            this.setState({articles: results})
-            // results.map((elem) => {
-            //     let title = elem.headline.main;
-            //     console.log(title);
-            //     return title;
-            // })
-            console.log(this.state.results)
+            console.log(res.data)
+            //this.setState({articles: res.data})
+        })
+        .catch(err => {
+            console.log(err)
         })
     }
 
@@ -45,19 +40,25 @@ class Main extends Component {
 
     handleFormSubmit = e => {
         e.preventDefault();
-        console.log(this.state)
+        //console.log(this.state)
         API.articleQuery(this.state.topic, this.state.startYear, this.state.endYear)
         .then(res => {
             //console.log(res.data.response.docs)
             const results = res.data.response.docs;
-            //console.log(results)
             this.setState({articles: results})
-            // results.map((elem) => {
-            //     let title = elem.headline.main;
-            //     console.log(title);
-            //     return title;
-            // })
-            console.log(this.state.results)
+            
+            //also save these to db
+            results.map(article => {
+                API.saveArticles({
+                    title: article.headline.main,
+                    url:article.web_url,
+                    date: article.pub_date
+                })
+                .then(results => {
+                    console.log(results)
+                })
+                
+            })
         })
     }
 
@@ -70,15 +71,17 @@ class Main extends Component {
                     handleEndYearInput={this.handleEndYearInput}
                     handleFormSubmit={this.handleFormSubmit}
                 />
-                {this.state.articles.map(article => (
-                    <Link to="/api/saved">
-                    <Results
-                    title = {article.headline.main}
+        
+                  {this.state.articles.map(article => (
+                      //console.log(article.web_url)
+                      <Results
+                        title={article.headline.main}
+                        date = {article.pub_date}
+                        url = {article.web_url}
                     />
-                    </Link>
                 ))}
             </Wrapper>
-        )
+        );
     }
 }
 

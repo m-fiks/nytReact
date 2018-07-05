@@ -3,6 +3,9 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3001;
+//const articlesController = require("./controllers/articlesController")
+const db = require("./models");
+//const apiRoutes = require("./routes/api/articles.js");
 app = express();
 
 // Define middleware here
@@ -13,13 +16,27 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+// Use apiRoutes
+//app.use("/api", apiRoutes);
+
+
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytreact");
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "./client/public/index.html"));
-  });
+app.get("/api/saved", (req,res) => {
+  db.Article
+        .find()
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err))
+})
 
+app.post("/api/all", (req,res) => {
+  //console.log(req.body)
+  db.Article
+    .create(req.body)
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422))
+})
 
 app.listen(PORT, function() {
     console.log(`now listening on PORT ${PORT}!`);
