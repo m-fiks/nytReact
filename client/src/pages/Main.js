@@ -12,7 +12,8 @@ class Main extends Component {
         articles : [],
         topic: "",
         startYear: "",
-        endYear: ""
+        endYear: "",
+        id: ""
     }
 
     componentDidMount () {
@@ -55,7 +56,7 @@ class Main extends Component {
                     date: article.pub_date
                 })
                 .then(results => {
-                    console.log(results)
+                    console.log(results.data._id)
                 })
                 
             })
@@ -73,8 +74,10 @@ class Main extends Component {
                 />
         
                   {this.state.articles.map(article => (
-                      //console.log(article.web_url)
+                      //console.log(article._id)
                       <Results
+                        id={article._id}
+                        key={article._id}
                         title={article.headline.main}
                         date = {article.pub_date}
                         url = {article.web_url}
