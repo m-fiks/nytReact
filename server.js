@@ -23,14 +23,15 @@ if (process.env.NODE_ENV === "production") {
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytreact");
 
-app.get("/api/saved", (req,res) => {
+app.get("/api/articles", (req,res) => {
   db.Article
-        .find()
+        .find({saved: true})
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
 })
 
-app.post("/api/all", (req,res) => {
+//save articles
+app.post("/api/articles", (req,res) => {
   //console.log(req.body)
   db.Article
     .create(req.body)

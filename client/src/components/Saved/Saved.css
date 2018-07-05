@@ -1,10 +1,11 @@
-.articleInfo {
+.savedArticles {
     border: solid 1px blueviolet;
     width: 800px;
     padding: 20px;
     margin: 2px;
 }
 
-.saves {
-    float: right;
+.savedAlready {
+    float: right
 }
+

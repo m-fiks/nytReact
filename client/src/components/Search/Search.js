@@ -37,7 +37,7 @@ const Search = props => (
                         placeholder="End Year">
                     </input>
                 <br/>
-                <button href="/search" onClick={props.handleFormSubmit} type="submit" className="btn"><span className="glyphicon glyphicon-search"></span></button>
+                <button onClick={props.handleFormSubmit} type="submit" className="btn"><span className="glyphicon glyphicon-search"></span></button>
 	    </div>
     </form>
 );

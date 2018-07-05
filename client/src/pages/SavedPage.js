@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import API from "../utils/API";
-import Results from "../components/Results";
-import Wrapper from "../components/Wrapper";
 import Search from "../components/Search";
-import Saved from "../components/Saved";
+import Results from "../components/Results";
+import Saved from"../components/Saved";
+import Wrapper from "../components/Wrapper";
 
-class Main extends Component {
+
+class SavedPage extends Component {
 
     state = {
         //set initial state
@@ -14,10 +14,7 @@ class Main extends Component {
         topic: "",
         startYear: "",
         endYear: "",
-    }
-
-    componentDidMount() {
-        console.log(this.state.saved)
+        saved: [0,1,2,3,5]
     }
 
     handleTopicInput = e => {
@@ -61,13 +58,31 @@ class Main extends Component {
                         title={article.headline.main}
                         date = {article.pub_date}
                         url = {article.web_url}
-                        //save BUTton is LInk to
+                        saveButton= { () => {
+                            API.saveArticles({ 
+                                title: article.headline.main,
+                                url: article.web_url,
+                                date: article.pub_date
+                            })
+                            .then(results => {
+                                this.state.saved.push(results.data)
+                                console.log(this.state.saved)
+                            })
+                        }}
                     />
                 ))}
+                
+                {this.state.saved.map(savedArt => (
+                        //console.log(article)
+                        <Saved
+                            title={savedArt.title}
+                        />
+                    ))
+                }
         
             </Wrapper>
         );
     }
 }
 
-export default Main;
+export default SavedPage;

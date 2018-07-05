@@ -6,11 +6,10 @@ export default {
         let queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + apiKey + "&q=" + topic + "&begin_date=" + startYear + "0101" + "&end_date=" + endYear + "1231";
         return axios.get(queryURL);
     },
-
     saveArticles: (data) => {
-        return axios.post("/api/all", data)
+        return axios.post("/api/articles", data)
     },
-    getAll: () => {
-        return axios.get("/api/saved");
-    }
+    getSaved: () => {
+        return axios.get("/api/articles");
+    },
 }
