@@ -2,11 +2,11 @@ import React from "react";
 import "./Search.css";
 
 const Search = props => (
-    <form className="form">
+    <form className="form" id="searchForm">
 	    <div className="form-group">
                 <label for="searchInput">Topic</label><br/>
                     <input
-                        value= {props.searchTopic}
+                        value={props.topic}
                         onChange= {props.handleTopicInput} 
                         name="topic"
                         id="searchInput"
@@ -17,7 +17,6 @@ const Search = props => (
                     <br/>
                 <label for="startYearInput">Start Year</label><br/>
                     <input
-                        value= {props.startYear}
                         onChange= {props.handleStartYearInput} 
                         name="startYearInput"
                         id="startYearInput"
@@ -28,7 +27,6 @@ const Search = props => (
                 <br/>
                 <label for="endYearInput">End Year</label><br/>
                     <input
-                        value= {props.endYear}
                         onChange= {props.handleEndYearInput} 
                         name="endYearInput"
                         id="endYearInput"

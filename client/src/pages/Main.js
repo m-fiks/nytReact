@@ -5,6 +5,7 @@ import Results from "../components/Results";
 import Wrapper from "../components/Wrapper";
 import Search from "../components/Search";
 import Saved from "../components/Saved";
+import Header from "../components/Header";
 
 class Main extends Component {
 
@@ -34,15 +35,24 @@ class Main extends Component {
         this.setState({endYear: e.target.value})
     }
     
-    //handle form submit
+    //handle form submit (search form)
     handleFormSubmit = e => {
         e.preventDefault();
-        //console.log(this.state)
+        //empty articles to make room for new??
+        this.setState({articles: []})
+
         API.articleQuery(this.state.topic, this.state.startYear, this.state.endYear)
         .then(res => {
             //console.log(res.data.response.docs)
             const results = res.data.response.docs;
-            this.setState({articles: results})
+            //clear the form???
+            this.setState({
+                articles: results,
+                topic: "",
+                startYear: "",
+                endYear: ""
+            })
+            //console.log(this.state)
         })
     }
 
@@ -89,13 +99,44 @@ class Main extends Component {
     render () {
         return (
             <Wrapper>
-                <Search
-                    handleTopicInput={this.handleTopicInput}
-                    handleStartYearInput={this.handleStartYearInput}
-                    handleEndYearInput={this.handleEndYearInput}
-                    handleFormSubmit={this.handleFormSubmit}
-                />
-        
+        <form className="form" id="searchForm">
+	    <div className="form-group">
+                <label for="searchInput">Topic</label><br/>
+                    <input
+                        value={this.state.topic}
+                        onChange= {this.handleTopicInput} 
+                        name="topic"
+                        id="searchInput"
+                        type="text" 
+                        className="search-query" 
+                        placeholder="Topic">
+                    </input>
+                    <br/>
+                <label for="startYearInput">Start Year</label><br/>
+                    <input
+                        value={this.state.startYear}
+                        onChange= {this.handleStartYearInput} 
+                        name="startYearInput"
+                        id="startYearInput"
+                        type="text" 
+                        className="search-query" 
+                        placeholder="Start Year">
+                    </input>
+                <br/>
+                <label for="endYearInput">End Year</label><br/>
+                    <input
+                        value={this.state.endYear}
+                        onChange= {this.handleEndYearInput} 
+                        name="endYearInput"
+                        id="endYearInput"
+                        type="text" 
+                        className="search-query" 
+                        placeholder="End Year">
+                    </input>
+                <br/>
+                <button onClick={this.handleFormSubmit} type="submit" className="btn"><span className="glyphicon glyphicon-search"></span></button>
+	    </div>
+    </form>
                   {this.state.articles.map(article => (
                       //console.log(article._id)
                       <Results
@@ -108,6 +149,7 @@ class Main extends Component {
                     />
                 ))}
         
+                    <Header/>
                     {this.state.saved.map(article => (
                     <Saved
                         title = {article.title}
