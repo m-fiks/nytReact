@@ -21,6 +21,7 @@ class Main extends Component {
         this.getSaved();
     }
 
+    //handle search topic input
     handleTopicInput = e => {
         this.setState({topic: e.target.value})
     }
@@ -32,7 +33,8 @@ class Main extends Component {
     handleEndYearInput = e => {
         this.setState({endYear: e.target.value})
     }
-
+    
+    //handle form submit
     handleFormSubmit = e => {
         e.preventDefault();
         //console.log(this.state)
@@ -49,7 +51,7 @@ class Main extends Component {
         //console.log(e.target.id)
         this.state.articles.map((elem) => {
             if(elem._id === e.target.id) {
-                console.log(elem)
+                //console.log(elem)
                 API.saveArticles({
                     title: elem.headline.main,
                     url: elem.web_url,
@@ -58,7 +60,7 @@ class Main extends Component {
                 .then(res => {
                     //console.log(res.data)
                     this.state.saved.push(res.data)
-                    //console.log(this.state.saved)
+                    this.getSaved();
                 })
             }
         })
@@ -68,18 +70,18 @@ class Main extends Component {
     getSaved = () => {
         API.getSaved()
         .then(res => {
-            console.log(res.data)
             this.setState({saved: res.data})
-            console.log(this.state.saved)
+            //console.log(this.state.saved)
         })
     }
 
-    //delete an article
+   //delete an article
    handleDelete = (e) => {
        console.log(e.target.id)
        API.deleteArticle(e.target.id)
        .then(res => {
            console.log('successfully removed: ' + res )
+           this.getSaved();
        })
    }
 
