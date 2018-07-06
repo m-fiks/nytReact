@@ -12,4 +12,7 @@ export default {
     getSaved: () => {
         return axios.get("/api/articles");
     },
+    deleteArticle: (id) => {
+        return axios.delete("/api/articles/" + id)
+    }
 }

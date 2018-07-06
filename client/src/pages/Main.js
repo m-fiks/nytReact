@@ -17,6 +17,10 @@ class Main extends Component {
         saved: []
     }
 
+    componentDidMount () {
+        this.getSaved();
+    }
+
     handleTopicInput = e => {
         this.setState({topic: e.target.value})
     }
@@ -60,14 +64,6 @@ class Main extends Component {
         })
     }
 
-    // renderSaved = () => {
-    //     return this.state.saved.map(article => (
-    //         <Saved
-    //             title = {article.headline.main}
-    //         />
-    //     ))
-    // }
-
     //get saved articles
     getSaved = () => {
         API.getSaved()
@@ -78,9 +74,15 @@ class Main extends Component {
         })
     }
 
-    componentDidMount () {
-        this.getSaved();
-    }
+    //delete an article
+   handleDelete = (e) => {
+       console.log(e.target.id)
+       API.deleteArticle(e.target.id)
+       .then(res => {
+           console.log('successfully removed: ' + res )
+       })
+   }
+
 
     render () {
         return (
@@ -107,6 +109,8 @@ class Main extends Component {
                     {this.state.saved.map(article => (
                     <Saved
                         title = {article.title}
+                        id ={article._id}
+                        handleDelete={this.handleDelete}
                     /> 
                     ))}
             </Wrapper>

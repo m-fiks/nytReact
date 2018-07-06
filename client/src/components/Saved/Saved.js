@@ -7,7 +7,7 @@ const Saved = props => (
     <div className="savedArticles">
         <div className="articleList">
             <h6> {props.title}
-                <button id={props.id} className="btn btn-primary savedAlready">Delete</button>
+                <button id={props.id} onClick={props.handleDelete} className="btn btn-primary savedAlready">Delete</button>
             </h6>
         </div>
     </div>

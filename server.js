@@ -39,6 +39,15 @@ app.post("/api/articles", (req,res) => {
     .catch(err => res.status(422))
 })
 
+app.delete("/api/articles/:id", (req,res) => {
+  console.log(req.params)
+  db.Art
+  .findById({_id: req.params.id})
+  .then(dbModel => dbModel.remove())
+  .then(dbModel => res.json(dbModel))
+  .catch(err => res.status(422).json(err))
+})
+
 app.listen(PORT, function() {
     console.log(`now listening on PORT ${PORT}!`);
 });
