@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const ArticleSchema = new Schema({
+const ArtSchema = new Schema({
     title: {
         type: String,
         required: true
@@ -13,14 +13,9 @@ const ArticleSchema = new Schema({
     date : {
         type: String,
         required: true
-    },
-    saved : {
-        type: Boolean,
-        required: true,
-        default: false
     }
 })
 
-const Article = mongoose.model("Article", ArticleSchema);
+const Art = mongoose.model("Art", ArtSchema);
 
-module.exports = Article;
+module.exports = Art;

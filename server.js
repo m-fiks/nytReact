@@ -3,9 +3,9 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3001;
-//const articlesController = require("./controllers/articlesController")
+//const ArtsController = require("./controllers/ArtsController")
 const db = require("./models");
-//const apiRoutes = require("./routes/api/articles.js");
+//const apiRoutes = require("./routes/api/Arts.js");
 app = express();
 
 // Define middleware here
@@ -24,16 +24,16 @@ if (process.env.NODE_ENV === "production") {
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytreact");
 
 app.get("/api/articles", (req,res) => {
-  db.Article
-        .find({saved: true})
+  db.Art
+        .find({})
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
 })
 
-//save articles
+//save Arts
 app.post("/api/articles", (req,res) => {
   //console.log(req.body)
-  db.Article
+  db.Art
     .create(req.body)
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422))

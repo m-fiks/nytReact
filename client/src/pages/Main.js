@@ -14,10 +14,7 @@ class Main extends Component {
         topic: "",
         startYear: "",
         endYear: "",
-    }
-
-    componentDidMount() {
-        console.log(this.state.saved)
+        saved: []
     }
 
     handleTopicInput = e => {
@@ -43,6 +40,48 @@ class Main extends Component {
         })
     }
 
+    saveButton = e => {
+        e.preventDefault();
+        //console.log(e.target.id)
+        this.state.articles.map((elem) => {
+            if(elem._id === e.target.id) {
+                console.log(elem)
+                API.saveArticles({
+                    title: elem.headline.main,
+                    url: elem.web_url,
+                    date: Date.now()
+                })
+                .then(res => {
+                    //console.log(res.data)
+                    this.state.saved.push(res.data)
+                    //console.log(this.state.saved)
+                })
+            }
+        })
+    }
+
+    // renderSaved = () => {
+    //     return this.state.saved.map(article => (
+    //         <Saved
+    //             title = {article.headline.main}
+    //         />
+    //     ))
+    // }
+
+    //get saved articles
+    getSaved = () => {
+        API.getSaved()
+        .then(res => {
+            console.log(res.data)
+            this.setState({saved: res.data})
+            console.log(this.state.saved)
+        })
+    }
+
+    componentDidMount () {
+        this.getSaved();
+    }
+
     render () {
         return (
             <Wrapper>
@@ -61,10 +100,15 @@ class Main extends Component {
                         title={article.headline.main}
                         date = {article.pub_date}
                         url = {article.web_url}
-                        //save BUTton is LInk to
+                        saveButton = {this.saveButton}
                     />
                 ))}
         
+                    {this.state.saved.map(article => (
+                    <Saved
+                        title = {article.title}
+                    /> 
+                    ))}
             </Wrapper>
         );
     }

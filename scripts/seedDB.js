@@ -35,14 +35,4 @@ const articleSeed = [
     },
   ]
 
-  db.Article
-  .remove({})
-  .then(() => db.Article.collection.insertMany(articleSeed))
-  .then(data => {
-    console.log(data.insertedIds.length + " records inserted!");
-    process.exit(0);
-  })
-  .catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
+  // db.Article.remove({})
