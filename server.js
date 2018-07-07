@@ -16,18 +16,14 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// Use apiRoutes
-//app.use("/api", apiRoutes);
-
-
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytreact");
 
 app.get("/api/articles", (req,res) => {
   db.Art
-        .find({})
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err))
+      .find({})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err))
 })
 
 //save Arts

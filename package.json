@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/m-fiks/nytreact/issues"
   },
-  "homepage": "https://github.com/m-fiks/nytreact#readme",
+  "homepage": "https://github.com/m-fiks/nytreact",
   "dependencies": {
     "axios": "^0.18.0",
     "concurrently": "^3.6.0",
