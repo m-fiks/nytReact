@@ -3,7 +3,6 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3001;
-//const ArtsController = require("./controllers/ArtsController")
 const db = require("./models");
 //const apiRoutes = require("./routes/api/Arts.js");
 app = express();
