@@ -17,8 +17,7 @@ if (process.env.NODE_ENV === "production") {
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytreact");
-mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
+
 
 
 app.get("/api/articles", (req,res) => {
