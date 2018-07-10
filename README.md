@@ -2,7 +2,7 @@
 
 This application lets users search for articles, save articles they want, and delete their saved articles. It uses the New York Times Article Search API.
 
-##Deployed: [https://newnewyorkreact.herokuapp.com/]
+Deployed: [https://newnewyorkreact.herokuapp.com/]
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
