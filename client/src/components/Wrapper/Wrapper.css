@@ -1,0 +1,11 @@
+.page-header {
+    font-family: 'Neuton', serif;
+    color: rgb(27, 27, 109);
+}
+
+.container {
+    font-family: 'Space Mono', monospace;
+    background-color: rgba(206, 217, 219, 0.781);
+    padding: 30px;
+}
+

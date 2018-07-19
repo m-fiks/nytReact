@@ -1,11 +1,16 @@
 .savedArticles {
-    border: solid 1px blueviolet;
-    width: 800px;
+    border: solid 1px rgb(53, 45, 53);
+    width: 740px;
     padding: 20px;
     margin: 2px;
 }
 
 .savedAlready {
-    float: right
+    float: right;
+    border: none;
+    background-color: rgb(153, 134, 28);
 }
 
+.savedAlready:hover {
+    background-color: rgb(90, 36, 36);
+}
