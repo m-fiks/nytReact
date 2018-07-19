@@ -1,10 +1,12 @@
 .articleInfo {
-    border: solid 1px blueviolet;
-    width: 800px;
+    border: solid 1px rgb(53, 45, 53);
+    width: 740px;
     padding: 20px;
     margin: 2px;
 }
 
 .saves {
     float: right;
+    border: none;
+    background-color: rgb(153, 134, 28);
 }
