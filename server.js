@@ -26,7 +26,7 @@ mongoose.connect(MONGODB_URI);
 
 app.get("/api/articles", (req,res) => {
   db.Art
-      .find({})
+      .find({}).limit(10)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
 })
