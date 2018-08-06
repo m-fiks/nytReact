@@ -19,6 +19,7 @@ class Main extends Component {
     }
 
     componentDidMount () {
+        this.setState({saved: []})
         this.getSaved();
     }
 
