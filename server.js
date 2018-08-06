@@ -42,18 +42,15 @@ app.post("/api/articles", (req,res) => {
 
 app.delete("/api/articles/:id", (req,res) => {
   console.log(req.params.id)
-  db.Art.findById({_id: req.params.id}, (err, data) => {
+  db.Art.findById({_id: req.params.id}, (err, dbModel) => {
     if(err){
       res.status(422).send(err)
-    } else if (data){
-      console.log(data)
-      data.remove()
-      res.json(data)
+    } else if (dbModel){
+      console.log(dbModel)
+      dbModel.remove()
+      res.json(dbModel)
     }
-  }) // .then(dbModel => {
-  //   console.log(dbModel)
-  //   dbModel.remove()
-  //   res.json(dbModel)
+  })
 })
 
 app.listen(PORT, function() {
