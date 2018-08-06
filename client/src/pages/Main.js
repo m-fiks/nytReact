@@ -19,8 +19,15 @@ class Main extends Component {
     }
 
     componentDidMount () {
-        this.setState({saved: []})
+        this.deleteAll();
         this.getSaved();
+    }
+
+    deleteAll = () => {
+        API.deleteAll()
+        .then((res) => {
+            console.log(res)
+        })
     }
 
     //handle search topic input
@@ -74,6 +81,9 @@ class Main extends Component {
                     this.getSaved();
                 })
             }
+            else {
+                console.log('error')
+            }
         })
     }
 
@@ -82,7 +92,7 @@ class Main extends Component {
         API.getSaved()
         .then(res => {
             this.setState({saved: res.data})
-            //console.log(this.state.saved)
+            console.log(this.state.saved)
         })
     }
 
@@ -91,7 +101,7 @@ class Main extends Component {
        console.log(e.target.id)
        API.deleteArticle(e.target.id)
        .then(res => {
-           console.log('successfully removed: ' + res )
+           console.log('successfully removed, ' + res )
            this.getSaved();
        })
    }
